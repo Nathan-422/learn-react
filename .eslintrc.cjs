@@ -5,7 +5,8 @@ module.exports = {
   },
   extends: [
     'standard',
-    'plugin:react/recommended'
+    'plugin:react/recommended',
+    'prettier'
   ],
   overrides: [
     {
@@ -26,10 +27,15 @@ module.exports = {
   },
   plugins: [
     'react',
-    // 'html'
+    'html',
   ],
   rules: {
     'react/react-in-jsx-scope': 'off',
     'space-before-function-paren': 'off'
+  },
+  settings: {
+    react: {
+      version: 'detect'
+    }
   }
 }
