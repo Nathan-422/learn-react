@@ -1,19 +1,18 @@
-import { useState } from "react"
+import { useState } from 'react'
 
 function App() {
+  const [newItem, setNewItem] = useState('')
+  const [todos, setTodos] = useState([])
 
-  const [newItem, setNewItem] = useState("");
-  const [todos, setTodos] = useState([]);
-  
-  function handleSubmit() {
-    e.preventDefault();
+  function handleSubmit () {
+    e.preventDefault()
 
     setTodos((currentTodos) => {
       return [
-        ...currentTodos, 
+        ...currentTodos,
         { id: crypto.randomUUID(), title: newItem, completed: false }
       ]
-    });
+    })
   }
 
   return (
@@ -21,11 +20,11 @@ function App() {
     <form className="new-item-form" onSubmit={handleSubmit}>
       <div className="form-row">
         <label htmlFor="item">New Item</label>
-        <input 
-          value={newItem} 
-          onChange={e => setNewItem(e.target.value)} 
-          type="text" 
-          id="item" 
+        <input
+          value={newItem}
+          onChange={e => setNewItem(e.target.value)}
+          type="text"
+          id="item"
         />
       </div>
       <button className="btn">Add</button>
