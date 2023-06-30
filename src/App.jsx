@@ -4,7 +4,7 @@ function App() {
   const [newItem, setNewItem] = useState('');
   const [todos, setTodos] = useState([]);
 
-  function handleSubmit() {
+  function handleSubmit(e) {
     e.preventDefault();
 
     setTodos((currentTodos) => {
@@ -12,6 +12,26 @@ function App() {
         ...currentTodos,
         {id: crypto.randomUUID(), title: newItem, completed: false},
       ];
+    });
+
+    setNewItem('');
+  }
+
+  function toggleTodo(id, completed) {
+    setTodos((currentTodos) => {
+      return currentTodos.map((todo) => {
+        if (todo.id === id) {
+          return {...todo, completed};
+        }
+
+        return todo;
+      });
+    });
+  }
+
+  function deleteTodo(id) {
+    setTodos((currentTodos) => {
+      return currentTodos.filter((todo) => todo.id !== id);
     });
   }
 
@@ -34,17 +54,23 @@ function App() {
       </form>
       <h1 className='header'>Todo List</h1>
       <ul className='list'>
-        <li>
-          <label>
-            <input
-              type='checkbox'
-              name=''
-              id=''
-            />
-            Item 1
-          </label>
-          <button>Delete</button>
-        </li>
+        {todos.length === 0 && "No todos"}
+        {todos.map((todo) => {
+          return (
+            <li key={todo.id}>
+              <label htmlFor={todo.id}>
+                <input
+                  type='checkbox'
+                  onChange={(e) => toggleTodo(todo.id, e.target.checked)}
+                  checked={todo.completed}
+                  id={todo.id}
+                />
+                {todo.title}
+              </label>
+              <button onClick={() => deleteTodo(todo.id)}>Delete</button>
+            </li>
+          );
+        })}
       </ul>
     </>
   );
