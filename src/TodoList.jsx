@@ -1,5 +1,11 @@
 import {TodoItem} from './TodoItem';
 
+interface TodoList(
+	todos,
+	toggleTodo,
+	deleteTodo,
+)
+
 export function TodoList({todos, toggleTodo, deleteTodo}) {
   return (
     <ul className='list'>
